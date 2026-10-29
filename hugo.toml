@@ -27,3 +27,7 @@ theme = 'PaperMod'
     name = 'About'
     url = '/about/'
     weight = 30
+  [[menu.main]]
+    name = 'Resume'
+    url = '/resume/'
+    weight = 40
