@@ -1,0 +1,4 @@
+baseURL = 'https://michaelhinderman.github.io/blog/'
+languageCode = 'en-us'
+title = 'Michael Hinderman'
+theme = 'PaperMod'
