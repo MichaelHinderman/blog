@@ -1,11 +1,4 @@
-# Edit this file to update the "Now" section on the home page.
+# Edit this file to update the "Now" panel on the home page.
+# Each item: text (required), status (short label), link (optional, site-relative).
 updated: 2026-10-29
-items:
-  - text: "Writing up the first round of Job Security interviews"
-    status: "Research"
-    link: "/work/research/job-security/"
-  - text: "Adding a save system to Dungeon Run"
-    status: "Building"
-    link: "/work/builds/dungeon-run/"
-  - text: "Reading about eBPF for the next lab project"
-    status: "Learning"
+items: []
