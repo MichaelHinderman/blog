@@ -1,8 +1,9 @@
 ---
-title: "Resume"
-description: "A long-form, technology-focused account of what I've built and run over ten years in security operations and automation."
+title: "Long form"
 ShowToc: true
-TocOpen: false
+build:
+  render: never
+  list: never
 ---
 
 

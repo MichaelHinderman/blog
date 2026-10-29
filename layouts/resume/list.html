@@ -1,0 +1,46 @@
+{{ define "main" }}
+{{- $short := .Site.GetPage "/resume/short" -}}
+{{- $long  := .Site.GetPage "/resume/long" -}}
+{{- $pdf   := .Site.Params.resumePdf | default "files/MHinderman-Resume.pdf" -}}
+<link rel="stylesheet" href="{{ "css/resume.css" | relURL }}">
+
+<h1>{{ .Title }}</h1>
+
+<div class="resume-tabs" role="tablist" aria-label="Resume versions">
+  <button role="tab" id="tab-short" aria-controls="panel-short" aria-selected="true" data-tab="short">Short form</button>
+  <button role="tab" id="tab-long" aria-controls="panel-long" aria-selected="false" data-tab="long">Long form</button>
+  <button role="tab" id="tab-download" aria-controls="panel-download" aria-selected="false" data-tab="download">Download PDF</button>
+</div>
+
+<section id="panel-short" role="tabpanel" aria-labelledby="tab-short" class="resume-panel">
+  <p class="resume-note">Same content as the PDF.</p>
+  <div class="post-content md-content">{{ with $short }}{{ .Content }}{{ else }}<p>Missing <code>content/resume/short.md</code>.</p>{{ end }}</div>
+</section>
+
+<section id="panel-long" role="tabpanel" aria-labelledby="tab-long" class="resume-panel" hidden>
+  <div class="post-content md-content">{{ with $long }}{{ if .Params.ShowToc }}{{ partial "toc.html" . }}{{ end }}{{ .Content }}{{ else }}<p>Missing <code>content/resume/long.md</code>.</p>{{ end }}</div>
+</section>
+
+<section id="panel-download" role="tabpanel" aria-labelledby="tab-download" class="resume-panel" hidden>
+  <p><a class="resume-download" href="{{ $pdf | relURL }}" download>Download resume (PDF)</a></p>
+  <p class="resume-note">Or <a href="{{ $pdf | relURL }}" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+</section>
+
+<script>
+(function () {
+  var tabs = document.querySelectorAll('.resume-tabs [role=tab]');
+  var panels = document.querySelectorAll('.resume-panel');
+  function show(name) {
+    tabs.forEach(function (t) { t.setAttribute('aria-selected', t.dataset.tab === name ? 'true' : 'false'); });
+    panels.forEach(function (p) { p.hidden = p.id !== 'panel-' + name; });
+  }
+  function fromHash() {
+    var h = location.hash.replace('#', '');
+    return h === 'long' || h === 'download' ? h : 'short';
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { show(t.dataset.tab); }); });
+  show(fromHash());
+  window.addEventListener('hashchange', function () { show(fromHash()); });
+})();
+</script>
+{{ end }}
