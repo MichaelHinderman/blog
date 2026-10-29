@@ -1,4 +1,4 @@
 ---
 title: "Projects"
-description: "Things I've built."
+description: "Pick a category."
 ---
