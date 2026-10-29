@@ -1,46 +1,52 @@
 {{- define "main" }}
-{{- with site.Data.now }}
-<section class="home-block">
-  <div class="block-head">
-    <h2>Now</h2>
-    <span class="block-note">updated {{ .updated | time.Format "Jan 2, 2006" }}</span>
-  </div>
-  <ul class="now-list">
-    {{- range .items }}
-    <li>
-      <span class="pill pill-now">{{ .status }}</span>
-      {{ if .link }}<a href="{{ .link | relURL }}">{{ .text }}</a>{{ else }}{{ .text }}{{ end }}
-    </li>
+<div class="home-grid">
+  <div class="home-main">
+    {{- $work := where (where site.RegularPages "Section" "work") "Params.featured" true }}
+    {{- with $work }}
+    <section class="home-block">
+      <div class="block-head">
+        <h2>Selected work</h2>
+        <a class="block-note" href="{{ "work/" | relURL }}">all work →</a>
+      </div>
+      <ul class="work-list">
+        {{- range first 4 . }}{{ partial "work-item.html" . }}{{ end }}
+      </ul>
+    </section>
     {{- end }}
-  </ul>
-</section>
-{{- end }}
-
-{{- $work := where (where site.RegularPages "Section" "work") "Params.featured" true }}
-{{- with $work }}
-<section class="home-block">
-  <div class="block-head">
-    <h2>Selected work</h2>
-    <a class="block-note" href="{{ "work/" | relURL }}">all work →</a>
   </div>
-  <ul class="work-list">
-    {{- range first 4 . }}{{ partial "work-item.html" . }}{{ end }}
-  </ul>
-</section>
-{{- end }}
 
-{{- $writing := where site.RegularPages "Section" "writing" }}
-{{- with $writing }}
-<section class="home-block">
-  <div class="block-head">
-    <h2>Recent writing</h2>
-    <a class="block-note" href="{{ "writing/" | relURL }}">all writing →</a>
-  </div>
-  <ul class="writing-list">
-    {{- range first 3 . }}
-    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a><span class="block-note">{{ .Date | time.Format "Jan 2, 2006" }}</span></li>
+  <aside class="home-side">
+    {{- with site.Data.now }}
+    <section class="home-block now-panel">
+      <div class="block-head">
+        <h2>Now</h2>
+        <span class="block-note">{{ .updated | time.Format "Jan 2" }}</span>
+      </div>
+      <ul class="now-list">
+        {{- range .items }}
+        <li>
+          <span class="pill pill-now">{{ .status }}</span>
+          {{ if .link }}<a href="{{ .link | relURL }}">{{ .text }}</a>{{ else }}<span>{{ .text }}</span>{{ end }}
+        </li>
+        {{- end }}
+      </ul>
+    </section>
     {{- end }}
-  </ul>
-</section>
-{{- end }}
+
+    {{- $writing := where site.RegularPages "Section" "writing" }}
+    {{- with $writing }}
+    <section class="home-block">
+      <div class="block-head">
+        <h2>Recent writing</h2>
+        <a class="block-note" href="{{ "writing/" | relURL }}">all →</a>
+      </div>
+      <ul class="writing-list">
+        {{- range first 3 . }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a><span class="block-note">{{ .Date | time.Format "Jan 2" }}</span></li>
+        {{- end }}
+      </ul>
+    </section>
+    {{- end }}
+  </aside>
+</div>
 {{- end }}
