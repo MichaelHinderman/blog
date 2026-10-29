@@ -1,0 +1,91 @@
+/* ---- Palette: Bone & Oxblood ---- */
+:root {
+  --theme: #F6F4F1;
+  --entry: #FFFFFF;
+  --primary: #1F1A17;
+  --secondary: #6B625C;
+  --tertiary: #D9D3CC;
+  --content: #2A2421;
+  --border: #E6E1DA;
+  --code-bg: #EFEBE6;
+  --accent: #7A1F2B;
+  --accent-soft: #F3E4E6;
+  --main-width: 680px;
+  --radius: 4px;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+:root[data-theme="dark"] {
+  --theme: #1A1715;
+  --entry: #221E1B;
+  --primary: #EDE8E2;
+  --secondary: #A39A92;
+  --tertiary: #3A3431;
+  --content: #D8D1CA;
+  --border: #2E2926;
+  --code-bg: #2A2522;
+  --accent: #D9737F;
+  --accent-soft: #3A2226;
+}
+
+/* ---- Base ---- */
+body { font-size: 17px; line-height: 1.6; }
+h1, h2, h3, .logo a { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.01em; }
+a { color: var(--primary); }
+.post-content a, .work-facts a, .work-summary a, .now-list a, .writing-list a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.nav .menu a.active, .menu .active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+.page-header h1 { font-size: 36px; }
+.post-description { color: var(--secondary); max-width: 52ch; }
+
+/* ---- Home ---- */
+.home-intro { padding: 56px 0 32px; }
+.home-intro h1 { font-size: 40px; margin-bottom: 12px; }
+.home-intro p { font-size: 19px; color: var(--content); max-width: 56ch; }
+.home-block { margin: 40px 0; }
+.block-head { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 14px; }
+.block-head h2 { font-size: 22px; margin: 0; }
+.block-note { font-size: 13px; color: var(--secondary); text-decoration: none; }
+.now-list, .writing-list, .work-list { list-style: none; padding: 0; margin: 0; }
+.now-list li { display: flex; gap: 12px; align-items: baseline; padding: 8px 0; }
+.writing-list li { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px dotted var(--border); }
+
+/* ---- Pills and tags ---- */
+.pill { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--tertiary); color: var(--secondary); white-space: nowrap; }
+.pill-active, .pill-now { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+.pill-shipped { color: #2F6B4F; border-color: #2F6B4F; }
+.pill-paused  { color: var(--secondary); }
+.tag { color: var(--secondary); font-size: 13px; text-decoration: none; }
+
+/* ---- Work list ---- */
+.work-item { border-bottom: 1px solid var(--border); }
+.work-item[hidden] { display: none; }
+.work-item-link { display: block; padding: 18px 0; text-decoration: none; }
+.work-item-link:hover .work-item-title { color: var(--accent); }
+.work-item-head { display: flex; align-items: center; gap: 10px; }
+.work-item-title { font-family: var(--font-serif); font-size: 21px; font-weight: 600; }
+.work-item-summary { margin: 6px 0 8px; color: var(--content); max-width: 60ch; }
+.work-item-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--secondary); }
+
+/* ---- Filters ---- */
+.filters { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 20px; padding: 14px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.filter-label { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--secondary); width: 84px; flex-shrink: 0; }
+.chip { font: inherit; font-size: 13px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--tertiary); background: transparent; color: var(--content); cursor: pointer; }
+.chip:hover { border-color: var(--accent); }
+.chip.is-active { background: var(--primary); color: var(--theme); border-color: var(--primary); }
+.empty-note { color: var(--secondary); padding: 24px 0; }
+
+/* ---- Project page ---- */
+.work-meta { display: flex; gap: 12px; align-items: center; color: var(--secondary); font-size: 14px; margin-top: 8px; }
+.work-brief { margin: 24px 0; padding: 20px 24px; background: var(--entry); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius); }
+.work-summary { font-size: 18px; line-height: 1.55; margin: 0 0 14px; }
+.work-facts { display: grid; grid-template-columns: 80px 1fr; gap: 6px 16px; margin: 0; font-size: 15px; }
+.work-facts dt { color: var(--secondary); text-transform: uppercase; font-size: 11px; letter-spacing: .06em; padding-top: 3px; }
+.work-facts dd { margin: 0; }
+.work-divider { border: 0; border-top: 1px solid var(--border); margin: 36px 0 8px; }
+.work-detail-label { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--secondary); margin: 0 0 16px; }
+
+@media (max-width: 600px) {
+  .home-intro h1 { font-size: 32px; }
+  .filter-label { width: 100%; }
+  .work-facts { grid-template-columns: 1fr; }
+}

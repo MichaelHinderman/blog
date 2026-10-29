@@ -1,0 +1,18 @@
+{{- $cat := .CurrentSection.Title }}
+<li class="work-item"
+    data-category="{{ $cat | urlize }}"
+    data-status="{{ .Params.status | default "none" | urlize }}"
+    data-tags="{{ delimit (apply (.Params.tags | default slice) "urlize" ".") " " }}">
+  <a class="work-item-link" href="{{ .RelPermalink }}">
+    <div class="work-item-head">
+      <span class="work-item-title">{{ .Title }}</span>
+      {{- with .Params.status }}<span class="pill pill-{{ . | urlize }}">{{ . }}</span>{{ end }}
+    </div>
+    <p class="work-item-summary">{{ .Params.summary | default .Summary | plainify }}</p>
+    <div class="work-item-meta">
+      <span>{{ $cat }}</span>
+      <span>{{ .Date | time.Format "Jan 2006" }}</span>
+      {{- range .Params.tags }}<span class="tag">#{{ . }}</span>{{ end }}
+    </div>
+  </a>
+</li>

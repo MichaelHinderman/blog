@@ -5,27 +5,26 @@ theme = 'PaperMod'
 
 [params]
   defaultTheme = 'auto'
-  ShowReadingTime = true
+  ShowReadingTime = false
   ShowBreadCrumbs = true
-  ShowPostNavLinks = true
+  ShowPostNavLinks = false
+  hideFooter = false
+  mainSections = ['writing']
+  intro = "I build tools, run a small lab, and research how software work is changing. This site is a record of what I'm working on and what I've learned doing it."
 
-  [params.homeInfoParams]
-    Title = "Hi, I'm Michael"
-    Content = "I write about what I build. Browse **Projects** for the things I've shipped, or **Posts** for notes along the way."
+[outputs]
+  home = ['HTML', 'RSS', 'JSON']
 
 [menu]
   [[menu.main]]
-    identifier = 'projects'
-    name = 'Projects'
-    url = '/projects/'
+    name = 'Work'
+    url = '/work/'
     weight = 10
   [[menu.main]]
-    identifier = 'posts'
-    name = 'Posts'
-    url = '/posts/'
+    name = 'Writing'
+    url = '/writing/'
     weight = 20
   [[menu.main]]
-    identifier = 'about'
     name = 'About'
     url = '/about/'
     weight = 30

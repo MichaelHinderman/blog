@@ -1,0 +1,32 @@
+{{- define "main" }}
+<article class="post-single work-single">
+  <header class="post-header">
+    {{- partial "breadcrumbs.html" . }}
+    <h1 class="post-title">{{ .Title }}</h1>
+    <div class="work-meta">
+      {{- with .Params.status }}<span class="pill pill-{{ . | urlize }}">{{ . }}</span>{{ end }}
+      <span>{{ .CurrentSection.Title }}</span>
+      <span>{{ .Date | time.Format "January 2006" }}</span>
+    </div>
+  </header>
+
+  <section class="work-brief">
+    {{- with .Params.summary }}<p class="work-summary">{{ . }}</p>{{ end }}
+    <dl class="work-facts">
+      {{- with .Params.outcome }}<dt>Outcome</dt><dd>{{ . }}</dd>{{ end }}
+      {{- with .Params.stack }}<dt>Stack</dt><dd>{{ delimit . ", " }}</dd>{{ end }}
+      {{- with .Params.links }}<dt>Links</dt><dd>{{ range $i, $l := . }}{{ if $i }} · {{ end }}<a href="{{ $l.url }}">{{ $l.name }}</a>{{ end }}</dd>{{ end }}
+      {{- with .Params.tags }}<dt>Topics</dt><dd>{{ range . }}<a class="tag" href="{{ "tags/" | relURL }}{{ . | urlize }}/">#{{ . }}</a> {{ end }}</dd>{{ end }}
+    </dl>
+  </section>
+
+  {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
+  {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
+
+  {{- with .Content }}
+  <hr class="work-divider">
+  <p class="work-detail-label">Details</p>
+  <div class="post-content md-content">{{ . }}</div>
+  {{- end }}
+</article>
+{{- end }}

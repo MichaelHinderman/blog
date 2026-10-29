@@ -1,0 +1,64 @@
+{{- define "main" }}
+{{- $isRoot := eq (len .Ancestors) 1 }}
+{{- $pages := cond $isRoot (where site.RegularPages "Section" "work") .RegularPages }}
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<div class="post-description">{{ . | markdownify }}</div>{{ end }}
+</header>
+
+<div class="filters" data-filters>
+  {{- if $isRoot }}
+  <div class="filter-group" data-key="category">
+    <span class="filter-label">Category</span>
+    <button class="chip is-active" data-value="all">All</button>
+    {{- range .Sections.ByWeight }}<button class="chip" data-value="{{ .Title | urlize }}">{{ .Title }}</button>{{ end }}
+  </div>
+  {{- end }}
+  <div class="filter-group" data-key="status">
+    <span class="filter-label">Status</span>
+    <button class="chip is-active" data-value="all">All</button>
+    {{- $statuses := slice }}{{ range $pages }}{{ with .Params.status }}{{ $statuses = $statuses | append . }}{{ end }}{{ end }}
+    {{- range ($statuses | uniq) }}<button class="chip" data-value="{{ . | urlize }}">{{ . }}</button>{{ end }}
+  </div>
+  <div class="filter-group" data-key="tags">
+    <span class="filter-label">Topic</span>
+    <button class="chip is-active" data-value="all">All</button>
+    {{- $tags := slice }}{{ range $pages }}{{ range .Params.tags }}{{ $tags = $tags | append . }}{{ end }}{{ end }}
+    {{- range ($tags | uniq | sort) }}<button class="chip" data-value="{{ . | urlize }}">{{ . }}</button>{{ end }}
+  </div>
+</div>
+
+<ul class="work-list" data-work-list>
+  {{- range $pages.ByDate.Reverse }}{{ partial "work-item.html" . }}{{ end }}
+</ul>
+<p class="empty-note" data-empty hidden>Nothing matches those filters.</p>
+
+<script>
+(function () {
+  var active = { category: 'all', status: 'all', tags: 'all' };
+  var items = document.querySelectorAll('[data-work-list] .work-item');
+  var empty = document.querySelector('[data-empty]');
+  function apply() {
+    var shown = 0;
+    items.forEach(function (el) {
+      var ok = Object.keys(active).every(function (k) {
+        if (active[k] === 'all') return true;
+        return (el.dataset[k] || '').split(' ').indexOf(active[k]) !== -1;
+      });
+      el.hidden = !ok; if (ok) shown++;
+    });
+    empty.hidden = shown !== 0;
+  }
+  document.querySelectorAll('.filter-group').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('.chip'); if (!b) return;
+      g.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('is-active'); });
+      b.classList.add('is-active');
+      active[g.dataset.key] = b.dataset.value;
+      apply();
+    });
+  });
+})();
+</script>
+{{- end }}
