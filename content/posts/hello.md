@@ -1,7 +1,8 @@
-+++
-date = '2026-10-29T10:21:24-05:00'
-draft = false
-title = 'Hello'
-+++
+---
+title: "Hello, World"
+date: 2026-10-29
+summary: "Why this site exists and what to expect."
+tags: ["meta"]
+---
 
-Hello, world. This is the first post.
+This is the first post. Expect short write-ups on things I'm building.

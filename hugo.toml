@@ -2,3 +2,30 @@ baseURL = 'https://michaelhinderman.github.io/blog/'
 languageCode = 'en-us'
 title = 'Michael Hinderman'
 theme = 'PaperMod'
+
+[params]
+  defaultTheme = 'auto'
+  ShowReadingTime = true
+  ShowBreadCrumbs = true
+  ShowPostNavLinks = true
+
+  [params.homeInfoParams]
+    Title = "Hi, I'm Michael"
+    Content = "I write about what I build. Browse **Projects** for the things I've shipped, or **Posts** for notes along the way."
+
+[menu]
+  [[menu.main]]
+    identifier = 'projects'
+    name = 'Projects'
+    url = '/projects/'
+    weight = 10
+  [[menu.main]]
+    identifier = 'posts'
+    name = 'Posts'
+    url = '/posts/'
+    weight = 20
+  [[menu.main]]
+    identifier = 'about'
+    name = 'About'
+    url = '/about/'
+    weight = 30
