@@ -10,7 +10,6 @@ theme = 'PaperMod'
   ShowPostNavLinks = false
   hideFooter = false
   mainSections = ['writing']
-  intro = "I build tools, run a small lab, and research how software work is changing. This site is a record of what I'm working on and what I've learned doing it."
 
 [outputs]
   home = ['HTML', 'RSS', 'JSON']
